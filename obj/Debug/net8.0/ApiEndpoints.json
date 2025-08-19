@@ -1,0 +1,39 @@
+[
+  {
+    "ContainingType": "marketplaceE.Controlllers.AuthControllers",
+    "Method": "Autentication",
+    "RelativePath": "api/authentic",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PasswordHash",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "marketplaceE.Controlllers.AuthControllers",
+    "Method": "AddNewUser",
+    "RelativePath": "api/registr",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "marketplaceE.DTOs.NewUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
