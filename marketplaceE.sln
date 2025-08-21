@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36327.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "marketplaceE", "marketplaceE\marketplaceE.csproj", "{2CE23667-57A0-4A53-8844-B4D9E7EA84AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CE23667-57A0-4A53-8844-B4D9E7EA84AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE23667-57A0-4A53-8844-B4D9E7EA84AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE23667-57A0-4A53-8844-B4D9E7EA84AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE23667-57A0-4A53-8844-B4D9E7EA84AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DCE236B-21EE-4122-B382-AD2A7801CC2C}
+	EndGlobalSection
+EndGlobal
