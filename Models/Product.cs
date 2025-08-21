@@ -18,7 +18,7 @@ namespace marketplaceE.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         [Required] 
         public int MasterId { get; set; }
-        [Required] 
+        
         public User Master { get; set; }
 
         public List<Category> Categories { get; set; } = new();

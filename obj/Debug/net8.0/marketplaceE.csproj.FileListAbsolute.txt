@@ -172,3 +172,4 @@ C:\Users\Dasha\source\repos\marketplaceE\marketplaceE\bin\Debug\net8.0\Npgsql.dl
 C:\Users\Dasha\source\repos\marketplaceE\marketplaceE\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\Dasha\source\repos\marketplaceE\marketplaceE\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Dasha\source\repos\marketplaceE\marketplaceE\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\Dasha\source\repos\marketplaceE\marketplaceE\obj\Debug\net8.0\marketplaceE.sourcelink.json

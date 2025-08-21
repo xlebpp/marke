@@ -30,6 +30,7 @@ builder.Services.AddCors(options=> options.AddPolicy("Allowings", policy=>
 
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserValidationService, ValidationService>();
 builder.Services.AddScoped<JwtService>();
 builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection("JwtSettings"));

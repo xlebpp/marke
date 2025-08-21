@@ -45,8 +45,8 @@ namespace marketplaceE.Controlllers
 
         }
         [Route("api/authentic")]
-        [HttpGet]
-        public async Task <IActionResult> Autentication([FromQuery] EnteranceUser user1)
+        [HttpPost]
+        public async Task <IActionResult> Autentication([FromBody] EnteranceUser user1)
         {
             int id = await _userService.FindUser(user1);
 
