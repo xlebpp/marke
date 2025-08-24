@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dasha\\source\\repos\\marketplaceE\\marketplaceE\\marketplaceE.csproj": {}
+    "C:\\папочка\\marketplace\\marke\\marketplaceE.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dasha\\source\\repos\\marketplaceE\\marketplaceE\\marketplaceE.csproj": {
+    "C:\\папочка\\marketplace\\marke\\marketplaceE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dasha\\source\\repos\\marketplaceE\\marketplaceE\\marketplaceE.csproj",
+        "projectUniqueName": "C:\\папочка\\marketplace\\marke\\marketplaceE.csproj",
         "projectName": "marketplaceE",
-        "projectPath": "C:\\Users\\Dasha\\source\\repos\\marketplaceE\\marketplaceE\\marketplaceE.csproj",
-        "packagesPath": "C:\\Users\\Dasha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dasha\\source\\repos\\marketplaceE\\marketplaceE\\obj\\",
+        "projectPath": "C:\\папочка\\marketplace\\marke\\marketplaceE.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\папочка\\marketplace\\marke\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Dasha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -96,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FFED02E5-4BED-1199-687E-E3BEADAEB5A0}|marketplaceE.csproj|c:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\controlllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FFED02E5-4BED-1199-687E-E3BEADAEB5A0}|marketplaceE.csproj|solutionrelative:controlllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FFED02E5-4BED-1199-687E-E3BEADAEB5A0}|marketplaceE.csproj|c:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FFED02E5-4BED-1199-687E-E3BEADAEB5A0}|marketplaceE.csproj|solutionrelative:services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FFED02E5-4BED-1199-687E-E3BEADAEB5A0}|marketplaceE.csproj|c:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\dtos\\showcategories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FFED02E5-4BED-1199-687E-E3BEADAEB5A0}|marketplaceE.csproj|solutionrelative:dtos\\showcategories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FFED02E5-4BED-1199-687E-E3BEADAEB5A0}|marketplaceE.csproj|c:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FFED02E5-4BED-1199-687E-E3BEADAEB5A0}|marketplaceE.csproj|solutionrelative:models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FFED02E5-4BED-1199-687E-E3BEADAEB5A0}|marketplaceE.csproj|c:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\dtos\\showmasters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FFED02E5-4BED-1199-687E-E3BEADAEB5A0}|marketplaceE.csproj|solutionrelative:dtos\\showmasters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ShowCategories.cs",
+              "DocumentMoniker": "C:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\DTOs\\ShowCategories.cs",
+              "RelativeDocumentMoniker": "DTOs\\ShowCategories.cs",
+              "ToolTip": "C:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\DTOs\\ShowCategories.cs",
+              "RelativeToolTip": "DTOs\\ShowCategories.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T13:53:37.376Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "Models\\Category.cs",
+              "ToolTip": "C:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\Models\\Category.cs",
+              "RelativeToolTip": "Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T13:52:07.91Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ShowMasters.cs",
+              "DocumentMoniker": "C:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\DTOs\\ShowMasters.cs",
+              "RelativeDocumentMoniker": "DTOs\\ShowMasters.cs",
+              "ToolTip": "C:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\DTOs\\ShowMasters.cs",
+              "RelativeToolTip": "DTOs\\ShowMasters.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T13:27:48.251Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductService.cs",
+              "DocumentMoniker": "C:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\Services\\ProductService.cs",
+              "RelativeDocumentMoniker": "Services\\ProductService.cs",
+              "ToolTip": "C:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\Services\\ProductService.cs",
+              "RelativeToolTip": "Services\\ProductService.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAcwGEAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T13:15:26.232Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\Controlllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "Controlllers\\ProductController.cs",
+              "ToolTip": "C:\\\u043F\u0430\u043F\u043E\u0447\u043A\u0430\\marketplace\\marke\\Controlllers\\ProductController.cs",
+              "RelativeToolTip": "Controlllers\\ProductController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAmwCUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T13:12:13.833Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

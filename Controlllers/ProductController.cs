@@ -18,7 +18,7 @@ namespace marketplaceE.Controlllers
         public async Task<ActionResult<IEnumerable<ShowProducts>>> ShowProducts()
         {
             
-            if (await _productService.IsThereAny())
+            if (await _productService.IsThereAnyProduct())
             {
                 var products = _productService.GetProducts();
                 if(products != null)
@@ -30,5 +30,28 @@ namespace marketplaceE.Controlllers
             return BadRequest("Продуктов нет");
         }
 
+        [Route("api/search")]
+        [HttpGet]
+        public async Task<IActionResult> Search([FromBody] string search)
+        {
+
+            if (search == null)
+            {
+                return BadRequest("Введите что-нибудь");
+
+            }
+            var products =await  _productService.SearchProducts(search);
+            if ( products is not null)
+            {
+                return Ok(products);
+            }
+            var masters = await _productService.SearchMasters(search);
+            if (masters is not null)
+            {
+                return Ok(masters);
+            }
+
+            return BadRequest("По вашему запросу ничего не найдено");
+        }
     }
 }
