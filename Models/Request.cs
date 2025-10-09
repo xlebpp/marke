@@ -14,11 +14,11 @@ namespace marketplaceE.Models
         public int CustomerId {  get; set; }
         [Required] 
         public User Customer { get; set; }
-        [Required] 
-        public int CategoryId { get; set; }
+
         [Required] 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public List<Category> Categories { get; set; } = new();
+
 
     }
 }

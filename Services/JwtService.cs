@@ -23,17 +23,19 @@ namespace marketplaceE.Services
             
             var claims = new List<Claim>
             {
-                new Claim(type:"Email", userr.Email),
-                new Claim(type:"Role", userr.Role),
-                new Claim(type:"Id", id.ToString()),
-                new Claim(type:"Name", userr.UserName)
+                new Claim(ClaimTypes.Email, userr.Email),
+                new Claim(ClaimTypes.Role, userr.Role.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, id.ToString()),
+                new Claim(ClaimTypes.Name, userr.UserName)
             };
             var jwt = new JwtSecurityToken(
+                //issuer: "marketplaceE",
+                ///audience: "marketplaceEUsers",
                 expires: DateTime.UtcNow.Add(options.Value.Expires),
                 claims: claims,
                 signingCredentials: new SigningCredentials
                                         (new SymmetricSecurityKey
-                                            (Encoding.UTF8.GetBytes(options.Value.key)),
+                                            (Encoding.UTF8.GetBytes(options.Value.Key)),
                                             algorithm:SecurityAlgorithms.HmacSha256)
                                         
                                          

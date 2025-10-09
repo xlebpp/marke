@@ -7,7 +7,7 @@ namespace marketplaceE.Models
         [Required] 
         public int Id { get; set; }
         [Required] 
-        public string Url { get; set; }
+        public byte[] Url { get; set; }
 
         [Required] 
         public int ProductId { get; set; }

@@ -2,8 +2,10 @@
 using marketplaceE.DTOs;
 using marketplaceE.Models;
 using marketplaceE.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace marketplaceE.Controlllers
 {
@@ -25,21 +27,27 @@ namespace marketplaceE.Controlllers
         [HttpPost]
         public async Task <IActionResult> AddNewUser([FromBody] NewUserDto dto)
         {
-           
+            
             bool exsistance = await _userService.IsUserExsist(dto);
             if (exsistance)
             {
-                return BadRequest("Пользователь с таким логином уже существует");
+                return BadRequest(new List<ValidationError> { new ValidationError { Field = "Email", Message = "Пользователь с таким логином уже существует" } });
             }
             else
             {
-                var valid = await  _validation.UserRegistration(dto);
-                if(valid) 
+                try
                 {
+                    var valid = await _validation.UserRegistration(dto);                                    
                     await _userService.AddNewUser(dto);
                     return Ok("Успешно!!");
+                    
                 }
-                else { return BadRequest("Ошибка валидации"); }
+                catch(ValidationException ex) 
+                {
+                    return BadRequest(ex.Errors);
+                };
+
+                
                 
             }
 
@@ -48,15 +56,18 @@ namespace marketplaceE.Controlllers
         [HttpPost]
         public async Task <IActionResult> Autentication([FromBody] EnteranceUser user1)
         {
-            int id = await _userService.FindUser(user1);
 
+            Console.WriteLine("ВОТ БЛЯТЬ" + user1.Email + user1.PasswordHash); 
+            int id = await _userService.FindUser(user1);
+            
             if (id < 0)
             {
                 return BadRequest($"Ошибка! Пользователь с id = {id} не найден");
             }
             else
             {
-                
+
+               
                 var tocken = await _userService.CheckPassword(id, user1);
 
                 if(tocken is not null)
@@ -66,6 +77,63 @@ namespace marketplaceE.Controlllers
                 else { return BadRequest(tocken); }
             }
 
+        }
+        [Authorize]
+        [Route("api/user/avatar")]
+        [HttpGet]
+        public async Task <IActionResult> GetCircleUserAvatar()
+        {
+            var idd = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Console.WriteLine("ВОТ"+idd);
+            if (idd == "0")
+            {
+                
+                return Unauthorized();
+            }
+            if (string.IsNullOrEmpty(idd))
+            {
+                Console.WriteLine("ВОТОНО");
+            }
+            var id = Convert.ToInt32(idd);
+
+            var photo = await _userService.ShowCirclePhoto(id);
+            return Ok(photo);
+        }
+
+        [Route("api/masters")]
+        [HttpGet]
+        public async Task<IActionResult> GetMasters()
+        {
+            var exsistance = await _userService.AreThereAnyMasters();
+            if (!exsistance)
+            {
+                return NotFound("Ни одного мастера не найдено");
+            }
+            var masters = await _userService.ShowMasters();
+            if (masters == null || masters.Count() == 0)
+            {
+                return BadRequest("Мастера не вернулись");
+            }
+            return Ok(masters);
+        }
+
+        [Route("api/master")]
+        [HttpGet]
+        public async Task<IActionResult> GetMasterProfile([FromQuery]int id)
+        {
+            var exsistance = await _userService.CheckUserExcistanceById(id);
+            if (!exsistance)
+            {
+                return NotFound("Пользователь с таким id не найден");
+            }
+
+            var master = await _userService.OpenMasterProfile(id);
+
+            if (master != null)
+            {
+                return Ok(master);
+            }
+            return BadRequest("Мастер не найден");
         }
 
     }

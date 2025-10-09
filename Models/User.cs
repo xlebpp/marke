@@ -19,11 +19,13 @@ namespace marketplaceE.Models
         public RolesOfUsers Role { get; set; } = RolesOfUsers.User;
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public string? UserPhoto {  get; set; }
+        public byte[]? UserPhoto {  get; set; }
         [Required]
         public DateOnly DateOfBirth { get; set; } 
 
         public List<Product> Products { get; set; } = new();
+
+        public string? About { get; set; }
     }
 
     public enum RolesOfUsers

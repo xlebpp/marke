@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using marketplaceE.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace marketplaceE.DTOs
 {
     public class TokenUSerDto
     {
         [Required]
-        public string Role { get; set; }
+        public RolesOfUsers Role { get; set; }
 
         [Required] 
         public string Email { get; set; }

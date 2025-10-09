@@ -3,6 +3,7 @@ using marketplaceE.DTOs;
 using Microsoft.EntityFrameworkCore;
 using marketplaceE.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace marketplaceE.Services
@@ -13,7 +14,12 @@ namespace marketplaceE.Services
         Task<bool> AddNewUser(NewUserDto user);
         Task<int> FindUser(EnteranceUser user);
         Task<string> CheckPassword(int id, EnteranceUser user);
-      
+        Task<JsonResult> ShowCirclePhoto(int id);
+        Task<OpenMasterDto> OpenMasterProfile(int id);
+        Task<bool> CheckUserExcistanceById(int id);
+        Task<IEnumerable<ShowMasters>> ShowMasters();
+
+        Task<bool> AreThereAnyMasters();
 
     }
     public class UserService:IUserService
@@ -31,15 +37,27 @@ namespace marketplaceE.Services
 
         public async Task<bool> IsUserExsist(NewUserDto dto)
         {
-            var exsistance = await _context.Users.AnyAsync(c => c.Email == dto.Email);
-            if (exsistance)
-            {
+            // var amount = await _context.Users.Where(u => u.Email == dto.Email).CountAsync();
+            //if (amount > 1)
+            // {
+            //     return true;
+            // }
+            // var role = await _context.Users.Where(u => u.Email == dto.Email).Select(u => u.Role).FirstOrDefaultAsync();
+            // if (dto.Role == role)
+            //  {
+            ///      return true;
+            // }
+            //  return false;
+            var existance = await _context.Users.AnyAsync(u => u.Email == dto.Email);
+            if (existance) {
                 return true;
-
             }
-            else { return false; }
+            return false;
         }
-        
+
+
+
+
         public async Task<bool> AddNewUser(NewUserDto dto)
         {
 
@@ -52,7 +70,7 @@ namespace marketplaceE.Services
                 CreatedAt = DateTime.UtcNow
 
             };
-
+            
             user.PasswordHash = _hasher.HashPassword(user, dto.PasswordHash);
 
             _context.Users.Add(user);
@@ -82,27 +100,100 @@ namespace marketplaceE.Services
 
         public async Task<string> CheckPassword(int id, EnteranceUser user1)
         {
+            
             var userr = await _context.Users.FirstOrDefaultAsync(u => u.Email == user1.Email);
-            var passw = await _context.Users.Where(u => u.Id == id).Select(u=>u.PasswordHash).FirstOrDefaultAsync();
+            
+            ///var passw = await _context.Users.Where(u => u.Id == id).Select(u=>u.PasswordHash).FirstOrDefaultAsync();
             var verifyResult = _hasher.VerifyHashedPassword(userr, userr.PasswordHash, user1.PasswordHash);
-
+            
             if (verifyResult == PasswordVerificationResult.Failed)
             {
                 throw new Exception("Пароль не подходит");
             }
-            
-               var user = await _context.Users.Where(u=>u.Id==id)
-                    .Select(u=> new TokenUSerDto
+
+            var user = await _context.Users.Where(u => u.Id == id)
+                    .Select(u => new TokenUSerDto
                     {
-                        Role=u.Role.ToString(),
+                        Role = u.Role,
                         Email = u.Email,
-                        UserName=u.UserName
+                        UserName = u.UserName
 
                     }).FirstOrDefaultAsync();
-                if (user == null) { throw new Exception("Пользователь не найден"); }
-                return _jwtService.GenerateTocken(user, id);
             
+            if (user == null) { throw new Exception("Пользователь не найден"); }
+            return _jwtService.GenerateTocken(user, id);
+
         }
+
+        public async Task<JsonResult> ShowCirclePhoto(int id)
+        {
+            var photo = await _context.Users.Where(u => u.Id == id).Select(u => u.UserPhoto).FirstOrDefaultAsync();
+            
+            return new JsonResult(new { photo = photo!=null ? Convert.ToBase64String(photo) : null });
+        }
+        public async Task<bool> CheckUserExcistanceById(int id)
+        {
+            var excistance = await _context.Users.AnyAsync(u => u.Id == id);
+            if(excistance) { return true; }
+            return false;
+        }
+
+        public async Task<OpenMasterDto> OpenMasterProfile(int id)
+        {
+            var masterr = await _context.Users
+                           .Where(u => u.Id == id)
+                           .FirstOrDefaultAsync();
+            var products = await _context.Products
+                .Where(u => u.MasterId == id)
+                .Include(o => o.Orders).ThenInclude(r => r.Review).ToListAsync();
+            double rating=0;
+            var ratings=products
+                .SelectMany(p=>p.Orders)
+                .Where(o => o.Review != null)
+                .Select(o => o.Review.Rating)
+                .ToList();
+
+            if (ratings.Any())
+            {
+                rating = ratings.Average();
+            }              
+                                   
+            var master = new OpenMasterDto
+            {
+                MasterId=id,
+                Name = masterr.UserName,
+                UserPhoto=masterr.UserPhoto!=null ? Convert.ToBase64String(masterr.UserPhoto) : null,
+                Products=masterr.Products!=null ? masterr.Products.ToList() : null,
+                Rating=rating
+            };
+            return master;
+        }
+
+        public async Task<bool> AreThereAnyMasters()
+        {
+            var exsistance = await _context.Users.AnyAsync(u => u.Role == RolesOfUsers.Master);
+            if (!exsistance)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<IEnumerable<ShowMasters>> ShowMasters()
+        {
+            var masters = await _context.Users.Where(u => u.Role == RolesOfUsers.Master).ToListAsync();
+
+            var result = masters.Select(u => new ShowMasters
+            {
+                MasterId = u.Id,
+                Name = u.UserName,
+                UserPhoto = u.UserPhoto != null ? Convert.ToBase64String(u.UserPhoto) : null,
+                About = u.About
+            });
+
+            return result;
+        }
+
     }
 }
 

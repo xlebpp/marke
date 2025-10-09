@@ -10,5 +10,7 @@ namespace marketplaceE.DTOs
         [Required]
         public string Name { get; set; }
         public string? UserPhoto { get; set; }
+
+        public string? About { get; set; }
     }
 }

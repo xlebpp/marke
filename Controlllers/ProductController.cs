@@ -4,6 +4,7 @@ using marketplaceE.Services;
 namespace marketplaceE.Controlllers
 {
     [ApiController]
+
     public class ProductController: ControllerBase
     {
         private readonly IProductService _productService;
@@ -20,7 +21,7 @@ namespace marketplaceE.Controlllers
             
             if (await _productService.IsThereAnyProduct())
             {
-                var products = _productService.GetProducts();
+                var products = await _productService.GetProducts();
                 if(products != null)
                 {
                     return Ok(products);
@@ -32,7 +33,7 @@ namespace marketplaceE.Controlllers
 
         [Route("api/search")]
         [HttpGet]
-        public async Task<IActionResult> Search([FromBody] string search)
+        public async Task<IActionResult> Search([FromQuery] string search)
         {
 
             if (search == null)
@@ -40,18 +41,38 @@ namespace marketplaceE.Controlllers
                 return BadRequest("Введите что-нибудь");
 
             }
-            var products =await  _productService.SearchProducts(search);
-            if ( products is not null)
-            {
-                return Ok(products);
-            }
+            var products = await _productService.SearchProducts(search);
             var masters = await _productService.SearchMasters(search);
-            if (masters is not null)
+            if ((products == null || !products.Any()) && (masters == null || !masters.Any()))
             {
-                return Ok(masters);
+                return NotFound("По вашему запросу ничего не найдено");
+            }
+            return Ok(new
+            {
+                products,
+                masters
+            });
+
+
+        }
+
+        [Route("api/product")]
+        [HttpGet]
+        public async Task<IActionResult> ShowProduct([FromQuery] int id)
+        {
+            var ex = await _productService.DoesProductExsist(id);
+            if (!ex)
+            {
+                return BadRequest("Товар не cуществует");
             }
 
-            return BadRequest("По вашему запросу ничего не найдено");
+            var product = await _productService.GetProduct(id);
+            if (product == null)
+            {
+                return BadRequest("Товар не найден");
+            }
+            return Ok(product);
         }
+
     }
 }

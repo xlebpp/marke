@@ -67,6 +67,52 @@
         }
       }
     },
+    "/api/user/avatar": {
+      "get": {
+        "tags": [
+          "AuthControllers"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/masters": {
+      "get": {
+        "tags": [
+          "AuthControllers"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/master": {
+      "get": {
+        "tags": [
+          "AuthControllers"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/products": {
       "get": {
         "tags": [
@@ -101,6 +147,49 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/search": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/product": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -172,14 +261,18 @@
           "images",
           "masterId",
           "masterName",
-          "name",
-          "price"
+          "price",
+          "productId"
         ],
         "type": "object",
         "properties": {
+          "productId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "name": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "isService": {
             "type": "boolean"
@@ -196,15 +289,39 @@
             "minLength": 1,
             "type": "string"
           },
+          "rating": {
+            "type": "number",
+            "format": "double"
+          },
           "images": {
             "type": "array",
             "items": {
               "type": "string"
             }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Введите токен в формате: Bearer {your token}",
+        "name": "Authorization",
+        "in": "header"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
 }

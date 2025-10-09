@@ -37,6 +37,21 @@ namespace marketplaceE.Migrations
                     b.ToTable("CategoryProduct");
                 });
 
+            modelBuilder.Entity("CategoryRequest", b =>
+                {
+                    b.Property<int>("CategoriesId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RequestsId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CategoriesId", "RequestsId");
+
+                    b.HasIndex("RequestsId");
+
+                    b.ToTable("CategoryRequest");
+                });
+
             modelBuilder.Entity("marketplaceE.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -53,12 +68,7 @@ namespace marketplaceE.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("RequestId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("RequestId");
 
                     b.ToTable("Categories");
                 });
@@ -239,9 +249,9 @@ namespace marketplaceE.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Url")
+                    b.Property<byte[]>("Url")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("bytea");
 
                     b.HasKey("Id");
 
@@ -257,9 +267,6 @@ namespace marketplaceE.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -363,6 +370,9 @@ namespace marketplaceE.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("About")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -385,8 +395,8 @@ namespace marketplaceE.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("UserPhoto")
-                        .HasColumnType("text");
+                    b.Property<byte[]>("UserPhoto")
+                        .HasColumnType("bytea");
 
                     b.HasKey("Id");
 
@@ -408,11 +418,19 @@ namespace marketplaceE.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("marketplaceE.Models.Category", b =>
+            modelBuilder.Entity("CategoryRequest", b =>
                 {
+                    b.HasOne("marketplaceE.Models.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("marketplaceE.Models.Request", null)
-                        .WithMany("Categories")
-                        .HasForeignKey("RequestId");
+                        .WithMany()
+                        .HasForeignKey("RequestsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("marketplaceE.Models.Chat", b =>
@@ -468,7 +486,7 @@ namespace marketplaceE.Migrations
                         .IsRequired();
 
                     b.HasOne("marketplaceE.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("ProductId");
 
                     b.HasOne("marketplaceE.Models.Request", "Request")
@@ -591,11 +609,8 @@ namespace marketplaceE.Migrations
             modelBuilder.Entity("marketplaceE.Models.Product", b =>
                 {
                     b.Navigation("Images");
-                });
 
-            modelBuilder.Entity("marketplaceE.Models.Request", b =>
-                {
-                    b.Navigation("Categories");
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("marketplaceE.Models.User", b =>
