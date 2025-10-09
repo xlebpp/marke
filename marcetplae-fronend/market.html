@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Добро пожаловать</title>
+        <link rel="stylesheet" href="styler_market.css">        
+    </head>
+    <body>    
+        <div class = "block1">
+            <form id = "registration">
+                <div class = "pare">
+                    <label for="UserName">Имя:</label>
+                     <div class="input-wrapper">
+                        <input type="text"  id = "UserName" name = "UserName" required>
+                        <div id="UserNameError" class="errorMsg"></div>
+                     </div>
+                 
+                </div>
+                <div class = "pare">
+                    <label for = "DateOfBirth">Дата рождения: </label>  
+                    <div class="input-wrapper">
+                        <input type="date" id ="DateOfBirth" name="DateOfBirth" required> 
+                        <div id="DateOfBirthError" class="errorMsg"></div>
+                   </div>
+                </div>
+                 <div class = "pare">
+                    <label for = "Role">Зарегистрироваться как: </label>
+                    <div class="input-wrapper">
+                        <select id ="Role" name="Role">
+                            <option value="Master">Мастер</option>
+                            <option value ="User">Покупатель</option>
+                        </select>
+                        <div id="RoleError" class="errorMsg"></div>
+                    </div>
+                 </div>    
+                 <div class = "pare">
+                    <label for = "Email">Логин: </label>       
+                    <div class="input-wrapper">           
+                        <input type="email" id = "Email" name="Email" required>  
+                        <div id="EmailError" class="errorMsg"></div>
+                    </div>  
+
+                 </div>
+                 <div class = "pare">
+                    <label for="PasswordHash">Пароль: </label>  
+                    <div class="input-wrapper">                  
+                        <input type = "password" id = "PasswordHash" name = "PasswordHash" required>              
+                        <div id="PasswordHashError" class="errorMsg"></div>
+                    </div>
+                    
+                </div>             
+                      
+                           
+                <button type="submit"> Зарегистрироваться</button>
+
+                <label>Уже есть аккуант?</label>
+                <a href="authentication.html">
+                    <button type = "button">Войти</button>
+                </a>
+            </form>
+            <script>
+                document.getElementById("registration").addEventListener("submit", async function (f) {
+                   f.preventDefault();
+                   
+                    document.querySelectorAll(".errorMsg").forEach(el => {
+                        el.textContent = "";
+                        el.style.display="none";
+                    });
+                    document.querySelectorAll("input, select").forEach(el => el.classList.remove("error"));
+                   const user = {
+                        userName: f.target.UserName.value,
+                        passwordHash: f.target.PasswordHash.value,
+                        dateOfBirth: f.target.DateOfBirth.value,
+                        email: f.target.Email.value,
+                        role: f.target.Role.value
+
+                   };
+                try{
+                    const response = await fetch("https://localhost:7104/api/registr",{
+                    method: "POST",
+                    headers:{"Content-Type": "application/json"},
+                    body: JSON.stringify(user)
+                   });
+                   
+                    if (response.ok) {
+                        alert("Регистрация успешна!");
+                        window.location.href = "authentication.html";
+                    } 
+                    else {
+                        const errorData=await response.json();
+
+                        console.log(errorData);
+                        errorData.forEach(err=>{
+                            const inputField=document.getElementById(err.field);
+                            console.log("errorField:",err.field);
+                            console.log("inputField: ", inputField);
+                            const fieldError=document.getElementById(err.field+"Error");
+                            console.log("fieldError",fieldError);
+                            if(inputField){
+                                inputField.classList.add("error");
+                            }
+                            if (fieldError){
+                                fieldError.textContent=err.message;
+                                fieldError.style.display="block";
+                            }
+                        });
+                        return;
+                    }
+                }
+
+                catch(err){
+                    console.error("Ошибка сети", err);
+                }
+                   
+                });
+            </script>
+        </div>
+    </body>
+</html>

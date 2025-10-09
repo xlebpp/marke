@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>мастер</title>
+        <link rel ="stylesheet" href="styler-main.css"
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header class = "containeer">
+                <span class = "logo">Create</span>
+                                
+                <nav>
+                    <ul>
+                        
+                        <li><a href ="#" onclick = "showMenu(event)" style="text-decoration: none;">Главная</a></li>
+                        <li class="search-item">
+                            <form id ="searchForm" class="searchForm" action="/search" method="get">
+                                <input id = "search_input" class = "search_input" type="search" placeholder="Введите что-нибудь для поиска">
+                                <button id="search_button" class= "searcher" type="submit">Искать</button>
+                            </form>
+                        </li>
+                        
+                        <li class = "profile">
+                            <a class="prof" href="profile.html" style="text-decoration: none;">
+                                <img id="avatar" src ="C:\Users\Dasha\Downloads\ava.jpg" style="width:40px; height:40px; border-radius:50%">
+                                <span>Профиль</span>
+                            </a>
+                        </li>
+                        <li class = "basket">
+                            <a href="basket.html" style="text-decoration: none;">
+                                <img src="pict/bask1.jpg" alt="Корзина" class="basket_icon">
+                                <span class ="basket_txt">Корзина</span>                                
+                            </a>
+                        </li>
+                                              
+
+                    </ul>
+                </nav>
+
+
+               
+            </header>
+        </div>  
+        <main>
+        <div id="master_profile"></div>
+    </main>
+
+        <script type="module" src="masterProfile.js"></script>
+        
+        <div id ="menu">
+            <div id ="products-menu"></div>
+            <div id ="masters-menu"></div>
+        </div>
+        
+
+       
+    </body>
+</html>

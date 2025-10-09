@@ -1,0 +1,120 @@
+body{
+    margin: 0;
+    padding: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh ;
+    background-color:#fcb068;
+}
+.block1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 500px;
+    height: 600px;
+    background-color:#ffddb3;
+    border: 1px solid #eba851;
+    border-radius: 8px;   
+    
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center ;
+}
+
+.pare{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+label{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+label {
+    font-family: FreeMono, monospace;
+    font-weight: 400;
+    font-size: large;
+}
+
+input, select{
+    width: 320px;
+    height: 25px;
+    
+}
+
+button{
+    background-color:#fcb068;
+    border: #eba851;
+    width: 320px;
+    height: 60px; 
+}
+
+.auth{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 400px;
+    height: 330px;
+    background-color:#ffddb3;
+    border: 1px solid #eba851;
+    border-radius: 8px;
+}
+
+
+
+.errorMsg {
+    position: absolute;
+    left: 105%; /* справа от поля ввода */
+    top: 50%;
+    transform: translateY(-50%);
+    display: none; /* скрываем по умолчанию */
+    background:whitesmoke;
+    border: 1px solid #f00;
+    color: #721c24;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: normal;
+    min-width: 150px;
+    max-width: 300px;
+    z-index: 10;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
+
+}
+
+    
+    
+.errorMsg::after {
+    content: "";
+    position: absolute;
+    left: -10px; /* положение стрелки относительно блока */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 10px 8px 0; /* треугольник */
+    border-color: transparent #f00 transparent transparent; /* красная рамка */
+}
+
+.errorMsg::before {
+    content: "";
+    position: absolute;
+    left: -9px; /* чуть внутри для белого фона */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 9px 7px 0;
+    border-color: transparent #fff transparent transparent; /* белый фон стрелки */
+}

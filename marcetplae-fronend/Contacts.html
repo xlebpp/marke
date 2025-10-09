@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Контакты</title>
+        <link rel ="stylesheet" href="styler-main.css"
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header class = "containeer">
+                <span class = "logo">Create</span>
+                <nav>
+                    <ul>
+                        
+                        <li><a href ="main.html" style="text-decoration: none;">Главная</a></li>
+                        <li><a href="about.html" style="text-decoration: none;">О нас</a></li>
+                        <li><a href="#" style="text-decoration: none;">Еще что-нибудь</a></li>
+                        <li class ="active"><a href="Contacts.html" style="text-decoration: none;">Контакты</a></li>
+                        <li class = "profile">
+                            <a class="prof" href="profile.html" style="text-decoration: none;">
+                                <img id="avatar" src ="C:\Users\Dasha\Downloads\ava.jpg" style="width:40px; height:40px; border-radius:50%">
+                                <span>Профиль</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <form action="/search" method="get">
+                    <input type="search" placeholder="Введите что-нибудь для поиска">
+                    <button class= "searcher "type="submit">Искать</button>
+
+                </form>
+            </header>
+        </div>  
+
+         <script>
+            document.addEventListener("DOMContentLoaded", async()=>{
+                try{
+                    const token = localStorage.getItem("token");
+                   
+                    const response = await fetch ("https://localhost:7104/api/user/avatar",{
+                        method:"GET",
+                        headers:{
+                            "Authorization": "Bearer " + token
+                        }
+                    });
+                    if(!token){
+                        console.error("Нет токена блять");
+                        return;
+                    }
+                    if(response.ok){
+                        const data = await response.json();
+                        console.log("full response:", data);
+                        console.log("photo field:", data.value.photo);
+                        if(data.value.photo){
+                            document.getElementById("avatar").src=`data:image/png;base64,${data.value.photo}`;
+                           
+                        }
+                        else{
+                            document.getElementById("avatar").src = "/Photos/ava.jpg"
+                        }
+                    }
+                    else{
+                        console.error("Ошибка при получении фото");
+                    }
+                }
+                catch(err){
+                    console.error("Ошибка запроса", err);
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Главная</title>
+        <link rel ="stylesheet" href="styler-main.css"
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header class = "containeer">
+                <span class = "logo">Create</span>
+                                
+                <nav>
+                    <ul>
+                        
+                        <li class ="active"><a href ="main.html" onclick = "showMenu(event)" style="text-decoration: none;">Главная</a></li>
+                        <li class="search-item">
+                            <form id ="searchForm" class="searchForm" action="/search" method="get">
+                                <input id = "search_input" class = "search_input" type="search" placeholder="Введите что-нибудь для поиска">
+                                <button id="search_button" class= "searcher" type="submit">Искать</button>
+                            </form>
+                        </li>
+                        
+                        <li class = "profile">
+                            <a class="prof" href="profile.html" style="text-decoration: none;">
+                                <img id="avatar" src ="C:\Users\Dasha\Downloads\ava.jpg" style="width:40px; height:40px; border-radius:50%">
+                                <span>Профиль</span>
+                            </a>
+                        </li>
+                        <li class = "basket">
+                            <a href="basket.html" style="text-decoration: none;">
+                                <img src="pict/bask1.jpg" alt="Корзина" class="basket_icon">
+                                <span class ="basket_txt">Корзина</span>                                
+                            </a>
+                        </li>
+                                              
+
+                    </ul>
+                </nav>
+
+
+               
+            </header>
+        </div>  
+
+        <div id ="menu">
+            <div id ="products-menu"></div>
+            <div id ="masters-menu"></div>
+        </div>
+        <div id="results" style ="display: none;"></div>
+
+        <script type="module" src="./search.js"></script>
+        <script type="module" src="./showpr.js"></script>
+        <script type="module">
+            import{ showpr } from './showpr.js';
+            document.addEventListener("DOMContentLoaded", () => {
+                showpr();   // ← вызов загрузки товаров при старте
+            });
+        </script>
+        <script type="module" src="./getMaster.js"></script>
+        <script type="module">
+            import{getMaster} from './getMaster.js';
+            document.addEventListener("DOMContentLoaded", ()=>{
+                getMaster();
+            })
+        </script>
+        <script>
+                function showMenu(event){
+
+                   if(window.location.pathname.endsWith("main.html")){
+
+                    event.preventDefault();
+                    const results=document.getElementById("results");
+                    const menu=document.getElementById("menu");
+                    const input = document.getElementById("search_input");
+
+                    if(results){
+                        results.style.display="none";
+                        results.innerHTML="";
+                    }
+
+                    if(menu){
+                         menu.style.display="flex";
+                    }
+                    if(input){
+                        input.value="";
+                    }
+
+                    if(typeof showpr==="function"){
+                        showpr();
+                    }
+                    if(typeof getMaster==="function"){
+                        getMaster();
+                    }
+                   }
+                    
+                }
+                
+                document.getElementById("searchForm").addEventListener("submit",function(e){
+                    e.preventDefault();
+                    const query = document.getElementById("search_input").value;
+                    search(query)
+                })
+                
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", async()=>{
+                try{
+                    const token = localStorage.getItem("token");
+                   
+                    const response = await fetch ("https://localhost:7104/api/user/avatar",{
+                        method:"GET",
+                        headers:{
+                            "Authorization": "Bearer " + token
+                        }
+                    });
+
+                    if(response.ok){
+                        const data = await response.json();
+                        console.log("full response:", data);
+                        console.log("photo field:", data.value.photo);
+                        if(data.value.photo){
+                            document.getElementById("avatar").src=`data:image/png;base64,${data.value.photo}`;
+                           
+                        }
+                        else{
+                            document.getElementById("avatar").src = "/Photos/ava.jpg"
+                        }
+                    }
+                    else{
+                        console.error("Ошибка при получении фото");
+                    }
+                }
+                catch(err){
+                    console.error("Ошибка запроса", err);
+                }
+            });
+        </script>
+        
+ 
+
+       
+    </body>
+</html>
