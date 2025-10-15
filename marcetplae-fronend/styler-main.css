@@ -161,7 +161,7 @@ header nav ul li.active::after{
 
 .product_card{
     display: flex;
-    flex-direction: column;
+    flex-direction:column;
     align-items: center;    /* центрируем горизонтально */
     justify-content: flex-start;
     width: 250px;

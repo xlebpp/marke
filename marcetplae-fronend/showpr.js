@@ -21,6 +21,7 @@ export async function showpr() {
     
 }
 
+
 function renderResults(products){
     const resultsDiv = document .getElementById("products-menu");
 

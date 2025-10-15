@@ -24,7 +24,7 @@
                         
                         <li class = "profile">
                             <a class="prof" href="profile.html" style="text-decoration: none;">
-                                <img id="avatar" src ="C:\Users\Dasha\Downloads\ava.jpg" style="width:40px; height:40px; border-radius:50%">
+                                <img id="avatar" src ="pict/ava.jpg" style="width:40px; height:40px; border-radius:50%">
                                 <span>Профиль</span>
                             </a>
                         </li>
@@ -116,7 +116,7 @@
                             "Authorization": "Bearer " + token
                         }
                     });
-
+                    console.log(token);
                     if(response.ok){
                         const data = await response.json();
                         console.log("full response:", data);

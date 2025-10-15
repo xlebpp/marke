@@ -5,7 +5,7 @@ export function getTocken(){
 
 export function parseJwt(token){
     try{
-        const base64Url = tocken.split('.')[1];
+        const base64Url = token.split('.')[1];
         const base64 = base64Url.replace(/-/g,'+').replace(/_/g, '/');
         const jsonPayload = decodeURIComponent(
             atob(base64).split('').map(c=>
@@ -33,5 +33,8 @@ export function getUserIdFromTocken(){
     if(!token) return null;
 
     const decoded = parseJwt(token);
+    console.log("Токен истекает:", new Date(decoded.exp * 1000));
     return decoded?.NameIdentifier || null;
+    
 }
+
