@@ -54,7 +54,13 @@
             <div id ="masters-menu"></div>
         </div>
         
+        <script type="module">
+            import {loadAvatar} from './getPhoto.js';
 
+            document.addEventListener("DOMContentLoaded",()=>{
+                loadAvatar("avatar");
+            });
+        </script>
        
     </body>
 </html>

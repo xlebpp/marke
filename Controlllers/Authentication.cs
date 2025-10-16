@@ -84,18 +84,14 @@ namespace marketplaceE.Controlllers
         public async Task <IActionResult> GetCircleUserAvatar()
         {
             var idd = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            Console.WriteLine("ВОТ"+idd);
+           
             if (idd == "0")
             {
                 
                 return Unauthorized();
             }
-            if (string.IsNullOrEmpty(idd))
-            {
-                Console.WriteLine("ВОТОНО");
-            }
-            var id = Convert.ToInt32(idd);
 
+            var id = Convert.ToInt32(idd);
             var photo = await _userService.ShowCirclePhoto(id);
             return Ok(photo);
         }
