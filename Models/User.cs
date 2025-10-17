@@ -24,6 +24,7 @@ namespace marketplaceE.Models
         public DateOnly DateOfBirth { get; set; } 
 
         public List<Product> Products { get; set; } = new();
+        public List<Request> Requests { get; set; } = new();
 
         public string? About { get; set; }
     }

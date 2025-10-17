@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Профиль</title>
+        <link rel ="stylesheet" href="styler-main.css"
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header class = "containeer">
+                <span class = "logo">Create</span>
+                <nav>
+                    <ul class = "pervi">
+                        
+                        <li><a href ="main.html" onclick = "showMenu(event)" style="text-decoration: none;">Главная</a></li>
+                        <li><a href="Catalog.html" style="text-decoration: none;">Каталог</a></li>
+                        <li class = "profile">
+                            <a class = "going" class="prof" href="profile.html" style="text-decoration: none;">
+                                <img id="avatar" src ="C:\Users\Dasha\Downloads\ava.jpg" style="width:40px; height:40px; border-radius:50%">
+                                <span>Профиль</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                   
+                </nav>
+
+            </header>
+        </div> 
+        <script type="module">
+            import {loadAvatar} from './getPhoto.js';
+
+            document.addEventListener("DOMContentLoaded",()=>{
+                loadAvatar("avatar");
+            });
+        </script>
+
+        <main>
+            <div id ="profile_container"></div>
+        </main>
+
+        <script type="module" src="./profileLoader.js"></script>
+    </body>
+</html>

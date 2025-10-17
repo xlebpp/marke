@@ -20,6 +20,9 @@ namespace marketplaceE.Services
         Task<IEnumerable<ShowMasters>> ShowMasters();
 
         Task<bool> AreThereAnyMasters();
+        Task<ShowMasterProfile> ShowMasterProfile(int id);
+        Task<RolesOfUsers> WhatRoleDoesTheUserHave(int id);
+        Task<ShowUserProfile> ShowUserProfile(int id);
 
     }
     public class UserService:IUserService
@@ -138,7 +141,7 @@ namespace marketplaceE.Services
             return false;
         }
 
-        public async Task<OpenMasterDto> OpenMasterProfile(int id)
+        public async Task<OpenMasterDto> OpenMasterProfile(int id)///нужен ли мне этот метод????
         {
             var masterr = await _context.Users
                            .Where(u => u.Id == id)
@@ -194,6 +197,54 @@ namespace marketplaceE.Services
             return result;
         }
 
+        public async Task<RolesOfUsers> WhatRoleDoesTheUserHave(int id)
+        {
+            var role = await _context.Users.Where(i => i.Id == id).Select(i => i.Role).FirstOrDefaultAsync();
+            return role;
+        }
+
+        public async Task<ShowMasterProfile> ShowMasterProfile(int id)
+        {
+            var masterr = await _context.Users.Where(i => i.Id == id).FirstOrDefaultAsync();
+
+            var products = await _context.Products.Where(m=>m.MasterId==id).Include(o=>o.Orders).ThenInclude(r=>r.Review).ToListAsync();
+
+            double rating = 0;
+            var ratings = products.SelectMany(o=>o.Orders).Where(r=>r.Review!=null).Select(r=>r.Review.Rating).ToList();
+            if (ratings.Any())
+            {
+                rating = ratings.Average();
+            }
+
+            var master = new ShowMasterProfile
+            {
+                Id=masterr.Id,
+                Name = masterr.UserName,
+                About = masterr.About!=null ? masterr.About: "Пока ничего",
+                Rating = rating,
+                Products = masterr.Products!=null? masterr.Products.ToList() : null,
+                UserPhoto = masterr.UserPhoto!=null ? Convert.ToBase64String(masterr.UserPhoto) : null
+            };
+
+            return master;
+        }
+
+        public async Task<ShowUserProfile> ShowUserProfile(int id)
+        {
+            var usert = await _context.Users.Where(i => i.Id == id).FirstOrDefaultAsync();
+
+            var user = new ShowUserProfile
+            {
+                Id = usert.Id,
+                Name = usert.UserName,
+                About = usert.About != null ? usert.About : "Пока ничего",
+                UserPhoto = usert.UserPhoto != null ? Convert.ToBase64String(usert.UserPhoto) : null,
+                Requests = usert.Requests != null ? usert.Requests.ToList() : null
+
+            };
+
+            return user;
+        }
     }
 }
 

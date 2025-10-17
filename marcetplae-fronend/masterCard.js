@@ -20,7 +20,8 @@ export default class MasterCard{
         card.appendChild(name);
 
         if(this.mode==="prodCard"||this.mode==="search"){
-            card.addEventListener("click", ()=>{
+            card.addEventListener("click", (event)=>{
+                event.stopPropagation();
                 window.location.href=`/master.html?id=${this.master.id}`;
             });
         }

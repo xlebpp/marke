@@ -131,6 +131,32 @@ namespace marketplaceE.Controlllers
             }
             return BadRequest("Мастер не найден");
         }
+        [Route("api/user")]
+        [HttpGet]
+        public async Task<IActionResult> ShowProfileOfUser([FromQuery]int id)
+        {
+            var exsistance = await _userService.CheckUserExcistanceById(id);
+            if (!exsistance) { return NotFound("Пользователь с таким id не найден"); }
 
+            var role = await _userService.WhatRoleDoesTheUserHave(id);
+
+            if (role == RolesOfUsers.Master)
+            {
+                var master = await _userService.ShowMasterProfile(id);
+                if(master!= null) 
+                {  
+                    return Ok(master); 
+                }
+                else
+                {
+                    return BadRequest("Мастер пустой");
+                }
+
+            }
+            var user = await _userService.ShowUserProfile(id);
+            return Ok(user);
+
+
+        }
     }
 }
