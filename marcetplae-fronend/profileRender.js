@@ -1,23 +1,71 @@
 import { createElement } from "react";
 
-export function renderProfile(userData, container){
-    container.innerHTML="";
-
-    const profileCard = document.createElement("div");
-    profileCard.className=`profile_card ${userData.role}`;
+export function renderProfile(userData, container, isOwnProfile){
+    const headerr = document.createElement("div");
+    headerr.className="profile_header";
 
     const img = document.createElement("img");
     img.src = userData.photo ||"/Photos/ava.jpg";
     img.alt= userData.name;
     img.className="profile_photo";
-    profileCard.appendChild(img);
+    headerr.appendChild(img);
 
     const name = document.createElement("h2");
     name.textContent=userData.name || "Без имени";
-    profileCard.appendChild(name);
+    headerr.appendChild(name);
 
-    if(userData.role==="User" && userData.requests?.length){
-        const reqContainer = document.createElement("div");
+    container.appendChild(headerr);
+
+    const mainContent = document.createElement("div");
+    mainContent.className = "profile_content";
+
+    if(userData.role==="User"){
+        renderUserProfile(mainContent, userData, isOwnProfile);      
+    }
+    else if(userData.role==="Master"){
+        renderMasterProfile(mainContent, userData, isOwnProfile);
+    }
+    else{
+        mainContent.textContent="Неизвестный тип пользователя";
+    }
+
+    container.appendChild(mainContent);
+
+    function renderUserProfile(container, userData, isOwnProfile){
+        const title = document.createElement("h3");
+        title.textContent = isOwnProfile ? "Мои индивидуальные заявки" : "Индивидуальные заявки";
+        container.appendChild(title);
+
+        if (userData.requests?.length>0){
+            const list = document.createElement("div");
+            list.className="request_list";
+
+            userData.requests.forEach(req=>{
+                const item = document.createElement("div");
+                item.className="request_item";
+                item.dataset.requestId=req.id;
+
+                item.innerHTML = `
+                        <p><strong>${req.title}</strong></p>
+                        <p>${req.description || "Без описания"}</p>
+                        <p><em>Статус: ${req.status}</em></p>`;
+
+                list.appendChild(item);
+            });
+
+            container.appendChild(list);            
+        }
+        else{
+            container.innerHTML+="<p>Заявок пока нет</p>";
+        }
+    }
+    
+
+    function renderMasterProfile(container, userData, isOwnProfile){
+        const title = document.createElement("h3");
+        title.textContent= isO
+    }
+const reqContainer = document.createElement("div");
         reqContainer.className="request_container";
 
         userData.requests.forEach(req=>{
@@ -27,24 +75,3 @@ export function renderProfile(userData, container){
             req.dataset.requestId=req.id;
             reqContainer.appendChild(reqCard);
         });
-
-        profileCard.appendChild(reqContainer);
-    }
-
-    if(userData.role==="Master"&&userData.products?.length){
-        const prodContainer = document.createElement("div");
-        prodContainer.className="product_conrainer";
-
-        userData.products.forEach(prod=>{
-            const prodCard=document.createElement("div");
-            prodCard.className="product_card";
-            prodCard.textContent=prod.name||"Без названия";
-            prodCard.dataset.productId=prod.id;
-            prodContainer.appendChild(prodCard);
-        });
-
-        profileCard.appendChild(prodContainer);
-    }
-
-    container.appendChild(profileCard);
-}

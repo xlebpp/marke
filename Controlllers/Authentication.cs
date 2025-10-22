@@ -113,7 +113,7 @@ namespace marketplaceE.Controlllers
             return Ok(masters);
         }
 
-        [Route("api/master")]
+        [Route("api/master")] ///тут скорее для карточки, не понятно, нужен ли
         [HttpGet]
         public async Task<IActionResult> GetMasterProfile([FromQuery]int id)
         {
@@ -131,7 +131,7 @@ namespace marketplaceE.Controlllers
             }
             return BadRequest("Мастер не найден");
         }
-        [Route("api/user")]
+        [Route("api/profile/user")]
         [HttpGet]
         public async Task<IActionResult> ShowProfileOfUser([FromQuery]int id)
         {
